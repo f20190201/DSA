@@ -1,3 +1,14 @@
+struct Node{
+    int data;
+    Node *left , *right;
+    
+    Node(int val){
+        data = val;
+        left = NULL;
+        right = NULL;
+    }
+}
+
 int search(int inorder[] , int start , int end , int curr){
     for(int i = start ; i <= end ; i++)
         if(inorder[i] == curr)
