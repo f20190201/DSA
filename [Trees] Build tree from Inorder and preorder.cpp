@@ -1,3 +1,14 @@
+struct Node{
+    int data;
+    Node *left , *right;
+    
+    Node(int val){
+        data = val;
+        left = NULL;
+        right = NULL;
+    }
+}
+
 void inorderPrint(Node* root){
     
     if(root == NULL)
