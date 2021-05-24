@@ -1,3 +1,14 @@
+struct Node{
+    int data;
+    Node *left , *right;
+    
+    Node(int val){
+        data = val;
+        left = NULL;
+        right = NULL;
+    }
+}
+
 Node* LCA(Node* root , int n1 , int n2){
     if(root == NULL)
         return NULL;
