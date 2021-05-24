@@ -2,6 +2,17 @@
 // If the current node is included, currDiameter is taken as the value otherwise, max(lDiameter , rDiameter) is taken as the value.
 //This solves the problem in O(N)
 
+struct Node{
+    int data;
+    Node *left , *right;
+    
+    Node(int val){
+        data = val;
+        left = NULL;
+        right = NULL;
+    }
+}
+
 int CalculateDiameter(Node* root , int* height){
     if(root == NULL){
         *height = 0;
