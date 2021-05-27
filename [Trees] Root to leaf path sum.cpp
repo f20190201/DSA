@@ -19,3 +19,17 @@ bool hasPathSum(Node *root, int S) {
         return (right || left);
     
 }
+// 2nd way of putting it
+
+bool hasPathSum(Node *root, int S) {
+ 
+    if(root == NULL)
+        return 0;
+    
+    else if((root->left == NULL) && (root->right == NULL)){
+       return(S == root->data);
+    }
+       
+    else
+        return (hasPathSum(root->left, S - root->data) || hasPathSum(root->right, S - root->data));
+}
