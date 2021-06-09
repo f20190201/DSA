@@ -26,3 +26,37 @@ int dp[10001][101];
         memset(dp,-1,sizeof dp);
         return sol(n,k);
     }
+
+
+-----------------------------------------------------------------------------
+    
+    
+    int eggDrop(int n, int k) 
+    {
+        // your code here
+        int t[n+1][k+1];
+        
+        
+        for(int i = 0 ; i <= n ; i++){
+            t[i][0] = 0;
+            t[i][1] = 1;
+        }
+            
+        for(int j = 0 ; j <= k ; j++){
+            t[1][j] = j;
+        }
+        
+        for(int i = 2 ; i <= n ; i++){
+            for(int j = 2 ; j <= k ; j++){
+                t[i][j] = INT_MAX;
+                
+                for(int x = 1 ; x <= j ; x++){
+                int result = 1 + max(t[i-1][x-1] , t[i][j - x]);
+                t[i][j] = min(t[i][j] , result);
+                }
+                
+            }
+        }
+        
+        return t[n][k];
+    }
