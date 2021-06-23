@@ -1,3 +1,25 @@
+bool isPrime(int x){
+    for(int i = 2 ; i <= sqrt(x) ; i++){
+        if(!(x % i))
+            return 0;
+    }
+    return 1;
+
+}
+
+vector<int> Solution::primesum(int A) {
+    
+    for(int i  = 2 ; i < A ; i++){
+        if(isPrime(i) && isPrime(A-i))
+            return {i , A-i};
+    }
+
+}
+
+
+------------------------------------------------------------------------
+
+
 vector<int> ans;
 
 vector<int>sieve(int A) {
