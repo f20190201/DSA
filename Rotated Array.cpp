@@ -40,3 +40,36 @@ int Solution::findMin(const vector<int> &A) {
             return -1;
         }
 };
+
+
+----------------------------------------------------------------------------------------------------------
+
+
+
+int Solution::findMin(const vector<int> &A) {
+    int N = A.size();
+    int lo = 0, hi = N-1, mid, prev, next;
+    
+    while (lo<=hi) {
+        //cout<<lo<<", "<<hi<<endl;
+        if (A[lo]<=A[hi]) {
+            return A[lo];
+        }
+        mid = lo + (hi-lo)/2;
+        next = (mid+1)%N;
+        prev = (mid-1)%N;
+        
+        if (A[prev] >= A[mid] and A[mid] <= A[next] ) {
+            return A[mid];
+        }
+        if (A[mid] <= A[hi]) {
+            hi = mid-1;
+        }
+        if (A[mid] >= A[lo]) {
+            lo = mid+1;
+        }
+    }
+    return -1;
+}
+
+
