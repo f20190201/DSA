@@ -36,3 +36,33 @@ int Solution::solve(ListNode* A, int B) {
     return result->val;
 
 }
+
+
+------------------------------------------------------------
+// Use slow and fast ptr but move the slow ptr only after moving fast ptr B times, because we're holding back B positions from the middle
+
+int printKthfrommid(struct Node* head_ref, int k)
+{
+    struct Node* slow = head_ref;
+    struct Node* fast = head_ref;  // initializing fast and slow pointers
+     
+    for( int i = 0 ; i < k ; i++ )
+     {
+       if(fast && fast->next)
+       {
+         fast = fast->next->next;  // moving the fast pointer
+       }
+       else
+       {
+         return -1;   // If no such node exists, return -1
+       }
+     }
+      
+     while(fast && fast->next)
+     {
+       slow  = slow->next;
+       fast  = fast->next->next;
+     }
+      
+    return slow->data;
+}
