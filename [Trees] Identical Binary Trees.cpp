@@ -21,3 +21,43 @@ bool isIdentical(Node *r1, Node *r2)
         }
         
     }
+
+
+----------------------------------------------------------------------------------
+    
+    /**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+void traversal(TreeNode* A , string &s){
+
+    if(!A){
+        s += '$';
+        return;
+    }
+    
+    s += char(A->val);
+
+    if(A->left)
+        traversal(A->left , s);
+    if(A->right)
+        traversal(A->right , s);
+
+    return;
+
+}
+
+int Solution::isSameTree(TreeNode* A, TreeNode* B) {
+    string s1 = "" , s2 = "";
+
+    traversal(A , s1);
+    traversal(B , s2);
+
+    return (s1 == s2);
+}
+
