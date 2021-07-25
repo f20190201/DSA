@@ -1,3 +1,5 @@
+https://leetcode.com/problems/search-in-rotated-sorted-array/discuss/154836/The-INF-and-INF-method-but-with-a-better-explanation-for-dummies-like-me
+
 class Solution {
 public:
     int pivot(vector<int>& nums){
@@ -61,3 +63,6 @@ public:
         
     }
 };
+
+
+
