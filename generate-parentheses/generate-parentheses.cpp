@@ -46,3 +46,38 @@ public:
         return result;
     }
 };
+
+
+----------------------------------------------------------------------------------------------------------------
+   // Idea is to keep track of number of close and open brackets in a stream
+   // At each moment, the number of open brackets should be <= n and number of closed brackets <= open
+    
+    vector<string> result; 
+    
+    void solve(int n , int close , int open , string s){
+        if(s.length() == 2 * n){
+            result.push_back(s);
+            return;
+        }
+        
+        if(open < n){
+            solve(n , close , open + 1 , s + '(');
+        }
+        
+        
+        if(close < open){
+            solve(n , close + 1 , open , s + ')');
+        }
+        
+        return;
+    }
+    
+    vector<string> generateParenthesis(int n) {   
+        result.clear();
+        string s = "";
+        
+        solve(n , 0 , 0 , s);
+        
+        return result;
+    }
+};
