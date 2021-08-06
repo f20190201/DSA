@@ -2,32 +2,13 @@ class Solution {
 public:
     int maxProfit(vector<int> &A) {
         
-        int n = A.size();
+        int ans = 0 , minPrice = INT_MAX;
         
-        vector<int>v(n);
-        
-        int maximum = INT_MIN;
-        
-        for(int i = n - 1 ; i >= 0 ; i--){
-            
-            if(A[i] > maximum)
-                maximum = A[i];
-            
-            v[i] = maximum;
+        for(int i = 0 ; i < A.size() ; i++){
+            minPrice = min(minPrice , A[i]);
+            ans = max(ans , A[i] - minPrice);
         }
         
-        int profit = INT_MIN;
-        
-        for(int i = 0 ; i < n - 1 ; i++){
-            int temp = v[i + 1] - A[i];
-            
-            profit = max(temp , profit);
-        }
-        
-        if(profit < 0)
-            return 0;
-        
-        return profit;
-        
+        return ans;
     }
 };
