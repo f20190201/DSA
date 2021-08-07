@@ -1,27 +1,25 @@
 class Solution {
 public:
-    double myPow(double x, int n) {
+    double myPow(double x, int n1) {
         double res = 1;
         
-        long long y = n;
+        int sign = n1 > 0;
         
-        int sign = (y >= 0) ? 1 : -1;
+        long long n = abs(n1);
         
-        y = abs(y);
-        
-        while(y){
+        while(n){
             
-            if(y % 2 != 0){
+            if(n % 2){
                 res = res * x;
-                y--;
+                n--;
             }
             
-            y = y / 2;
             x = x * x;
-            
+            n = n / 2;
         }
         
-        if(sign == -1)
+        
+        if(!sign)
             res = 1 / res;
         
         return res;
