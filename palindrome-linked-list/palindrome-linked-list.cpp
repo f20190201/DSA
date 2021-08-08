@@ -10,16 +10,6 @@
  */
 class Solution {
 public:
-    int len(ListNode* A){
-        int count = 0;
-        
-        while(A){
-            count++;
-            A = A->next;
-        }
-        
-        return count;
-    }
     
     ListNode* revLL(ListNode* A){
         ListNode* prev = NULL , *curr = A , *next;
