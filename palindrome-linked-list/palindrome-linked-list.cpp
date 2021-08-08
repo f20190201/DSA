@@ -39,11 +39,6 @@ public:
     }
     
     bool isPalindrome(ListNode* head) {
-        bool even = 0;
-        
-        if(len(head) % 2 == 0)
-            even = 1;
-        
         ListNode* slow = head , *fast = head;
         
         while(fast && fast->next){
@@ -51,10 +46,11 @@ public:
             slow = slow->next;
         }
         
+        // if number of nodes are odd, fast won't be NULL
         
-        
-        if(even == 0)
+        if(fast)
             slow = slow->next;
+        
         
         ListNode* curr = revLL(slow);
         
