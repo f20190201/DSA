@@ -10,52 +10,40 @@
  */
 class Solution {
 public:
-    int len(ListNode* A){
-        int count = 0;
-        
-        while(A){
-            A = A->next;
-            count++;
-        }
-        
-        return count;
-    }
     
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        if(len(l1) < len(l2))
-            return addTwoNumbers(l2 , l1);
-        
         int carry = 0;
         
-        ListNode* curr1 = l1;
-        ListNode* curr2 = l2;
+        vector<int> v;
         
-        while(curr1){
-            int sum = 0;
-            if(curr2){
-                sum = carry + curr1->val + curr2->val;
-                curr2 = curr2->next;
+        while(l1 || l2 || carry){
+            int sum = carry;
+            
+            if(l1){
+                sum += l1->val;
+                l1 = l1->next;
             }
-            else
-                sum = carry + curr1->val;
             
-            curr1->val = sum % 10;
+            if(l2){
+                sum += l2->val;
+                l2 = l2->next;
+            }
+            
+            v.push_back(sum % 10);
             carry = sum / 10;
-            
-            curr1 = curr1->next;
         }
         
-        if(carry){
-            curr1 = l1;
+        ListNode* start = new ListNode(0);
+        ListNode* newHead = start;
+        
+        for(auto x : v){
+            ListNode* temp = new ListNode(x);
             
-            while(curr1->next)
-                curr1 = curr1->next;
+            start->next = temp;
             
-            ListNode* temp = new ListNode(carry);
-            curr1->next = temp;
-            
+            start = temp;
         }
         
-        return l1;
+        return newHead->next;
     }
 };
