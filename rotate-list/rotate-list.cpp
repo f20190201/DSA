@@ -11,6 +11,7 @@
 class Solution {
 public:
     int len(ListNode* A){
+        
         int count = 0;
         
         while(A){
@@ -24,32 +25,34 @@ public:
     ListNode* rotateRight(ListNode* head, int k) {
         int n = len(head);
         
-        if(n <= 1)
-            return head;
+        if(!n)
+            return NULL;
         
         k = k % n;
         
-        ListNode* curr = head;
-        
-        while(n - 1 - k){
-            curr = curr->next;
-            k++;
-        }
-        
-        ListNode* curr1 = curr;
-        ListNode* newHead = curr->next;
-        
-        if(newHead == NULL)
+        if(!k)
             return head;
         
-        while(curr1->next)
-            curr1 = curr1->next;
+        ListNode* fast = head , *slow = head;
         
-        curr1->next = head;
+        for(int i = 0 ; i < k ; i++)
+            fast = fast->next;
         
-        curr->next = NULL;
+        ListNode* end;
+        
+        while(fast->next){
+            
+            slow = slow->next;
+            fast = fast->next;
+        }
+        
+        
+        ListNode* newHead = slow->next;
+        
+        slow->next = NULL;
+        
+        fast->next = head;
         
         return newHead;
-        
     }
 };
