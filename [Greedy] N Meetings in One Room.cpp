@@ -1,3 +1,7 @@
+// Sort according to increasing end times
+// Increase count only if start of current meeting is greater than end of prevois
+// Update end as max of end of current and end of previous
+
 int maxMeetings(int start[], int end[], int n)
     {
         // Your code here
