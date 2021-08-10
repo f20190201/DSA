@@ -2,33 +2,30 @@ class Solution {
 public:
     vector<vector<int>> result;
     
-    void solve(vector<int>& nums , vector<int> &v , int start , int end){
+    void solve(vector<int>& A , int index){
         
-        if(start == end){
-            result.push_back(nums);
+        if(index == A.size()){
+            result.push_back(A);
             return;
         }
         
-        for(int i = start ; i <= end ; i++){
+        for(int i = index ; i < A.size() ; i++){
             
+            swap(A[i] , A[index]);
             
-            swap(nums[start] , nums[i]);
+            solve(A , index + 1);
             
-            solve(nums , v , start + 1 , end);
-            
-            swap(nums[start] , nums[i]);
-            
-            
+            swap(A[i] , A[index]);
             
         }
+        
+        return;
     }
     
     vector<vector<int>> permute(vector<int>& nums) {
         result.clear();
         
-        vector<int> v;
-        
-        solve(nums , v , 0 , nums.size() - 1);
+        solve(nums , 0);
         
         return result;
     }
