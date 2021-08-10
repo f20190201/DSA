@@ -16,28 +16,28 @@ public:
         return 1;
     }
     
-    void solve(string s , vector<string> &v , int start){
+    void solve(string s , vector<string>&v , int index){
         
-        if(start == s.size()){
+        if(index == s.size()){
             result.push_back(v);
             return;
         }
         
-        for(int i = start ; i < s.size() ; i++){
+        for(int i = index ; i < s.size() ; i++){
             
-            string str = s.substr(start , i - start + 1);
+            string str = s.substr(index , i - index + 1);
             
             if(isPalin(str)){
                 v.push_back(str);
-            
+                
                 solve(s , v , i + 1);
-            
+                
                 v.pop_back();
             }
+            
         }
         
         return;
-        
     }
     
     vector<vector<string>> partition(string s) {
