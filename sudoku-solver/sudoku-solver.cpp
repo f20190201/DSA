@@ -1,58 +1,52 @@
 class Solution {
 public:
-    bool isValid(vector<vector<char>>& board , char c , int i , int j){
-        
+
+    bool isValid(vector<vector<char>>&A , int i , int j , char c){
         for(int k = 0 ; k < 9 ; k++){
-            
-            if(board[i][k] == c)
+            if(A[i][k] == c)
                 return 0;
             
-            if(board[k][j] == c)
+            if(A[k][j] == c)
                 return 0;
             
             int row = 3 * (i / 3) + (k / 3);
             int col = 3 * (j / 3) + (k % 3);
             
-            if(board[row][col] == c)
+            if(A[row][col] == c)
                 return 0;
         }
         
         return 1;
-        
     }
     
-    bool solve(vector<vector<char>>& board , int i , int j){
-        int n = board.size() , m = board[0].size();
+    bool solve(vector<vector<char>>&A , int i , int j){
         
-        if(i == n)
+        if(i == 9)
             return 1;
         
-        if(j == m)
-            return solve(board , i + 1 , 0);
+        if(j == 9)
+            return solve(A , i + 1 , 0);
         
-        if(board[i][j] != '.')
-            return solve(board , i , j + 1);
+        if(A[i][j] != '.')
+            return solve(A , i , j + 1);
         
-        for (char c = '1' ; c <= '9' ; c++){
+        for(char c = '1' ; c <= '9' ; c++){
             
-            if(isValid(board , c , i , j)){
-                board[i][j] = c;
+            if(isValid(A , i , j , c)){
+                A[i][j] = c;
                 
-                if(solve(board , i , j + 1))
+                if(solve(A , i , j + 1))
                     return 1;
                 
-                // else
-                //     board[i][j] = '.';
+                A[i][j] = '.';
             }
-                   
         }
-        
-        board[i][j] = '.';
         
         return 0;
     }
     
     void solveSudoku(vector<vector<char>>& board) {
+        
         solve(board , 0 , 0);
         
         return;
