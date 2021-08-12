@@ -1,8 +1,9 @@
 class Solution {
 public:
     int largestRectangleArea(vector<int>& A) {
-        stack<int>s;
-        int i = 0 , n = A.size() , temp = 0 , ans = 0;
+        int n = A.size() , temp = 0 , ans = 0;
+        stack<int> s;
+        int i = 0;
         
         while(i < n){
             
@@ -14,27 +15,23 @@ public:
             int top = s.top();
             s.pop();
             
-            if(!s.empty()){
-                temp = A[top] * (i - s.top() - 1);
-            }
-            else
-                temp = A[top] * (i - (-1) - 1);     // s.top() = -1 (assume)
+            int leftBound = (s.empty() ? -1 : s.top());
+            
+            temp = A[top] * (i - leftBound - 1);
             
             ans = max(ans , temp);
         }
         
         while(!s.empty()){
+            
             int top = s.top();
             s.pop();
             
-            if(!s.empty()){
-                temp = A[top] * (i - s.top() - 1);
-            }
-            else
-                temp = A[top] * (i - (-1) - 1);     // s.top() = -1 (assume)
+            int leftBound = (s.empty() ? -1 : s.top());
             
-            ans = max(ans , temp);
+            temp = A[top] * (i - leftBound - 1);
             
+            ans = max(ans , temp);    
         }
         
         return ans;
