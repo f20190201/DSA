@@ -41,3 +41,42 @@ int solve(vector<vector<int>>& matrix) {
     
     return ans;
 }
+
+
+---------------------
+  // Slow, runs in O(N K^2)  
+    
+    int n;
+void minCost(vector<vector<int>>& matrix , int fence , int curr_choice , int &ans , int temp){
+    int k = matrix[0].size();
+
+    if(fence == n){
+        ans = min(ans , temp);
+        return;
+    }
+    
+    for(int price = 0 ; price < k ; price++){
+        if(price == curr_choice)
+            continue;
+        
+        temp += matrix[fence][price];
+        minCost(matrix , fence + 1 , price , ans , temp);
+        temp -= matrix[fence][price];
+    }
+    
+    return;
+}
+
+int solve(vector<vector<int>>& matrix) {
+    int ans = INT_MAX , temp = 0;
+    n = matrix.size();
+    int k = matrix[0].size();
+
+    for(int j = 0 ; j < k ; j++){
+        temp += matrix[0][j];
+        minCost(matrix , 1 , j , ans , temp);
+        temp -= matrix[0][j];
+    }
+
+    return ans;
+}
