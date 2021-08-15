@@ -10,7 +10,7 @@ public:
         if(dp[eggs][floor] != -1)
             return dp[eggs][floor];
         
-        int ans = floor , low = 1 , high = floor;
+        int low = 1 , high = floor , ans = floor;
         
         while(low <= high){
             int mid = (low + high) / 2;
@@ -18,12 +18,16 @@ public:
             int up = solve(eggs , floor - mid);
             int down = solve(eggs - 1 , mid - 1);
             
-            ans = min(ans , 1 + max(up , down));
+            int temp = 1 + max(up , down);
             
-            if(up > down)
-                low = mid + 1;
-            else
+            if(up < down){
                 high = mid - 1;
+            }
+            
+            else
+                low = mid + 1;
+            
+            ans = min(ans , temp);
         }
         
         return dp[eggs][floor] = ans;
