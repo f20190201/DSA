@@ -45,3 +45,30 @@ int Solution::maxcoin(vector<int> &ar) {
     }
     return dp[0][n - 1];
 }
+
+
+--------------------------------------------------------------------------------------------------------------------------
+    
+    
+int dp[501][501];
+
+int solve(vector<int> &A , int i , int j){
+    if(i > j)
+        return 0;
+    
+    if(dp[i][j] != -1)
+        return dp[i][j];
+    
+    if(i == j)
+        return dp[i][j] = A[i];
+    
+    return dp[i][j] = max(A[i] + min(solve(A , i + 2 , j) ,solve(A , i + 1 , j - 1) ) , A[j] + min(solve(A , i , j - 2) , solve(A , i + 1 , j - 1)));
+}
+
+int Solution::maxcoin(vector<int> &A) {
+    int n = A.size();
+
+    memset(dp , -1 , sizeof(dp));
+    
+    return solve(A , 0 , n - 1);
+}
