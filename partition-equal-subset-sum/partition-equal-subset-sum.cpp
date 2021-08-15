@@ -1,7 +1,29 @@
 class Solution {
 public:
+//     int dp[201][20001];
+    
+//     bool solve(vector<int>& A , int sum , int temp , int index){
+        
+//         if(index == A.size()){
+//             if(temp == sum)
+//                 return 1;
+//             return 0;
+//         }
+        
+//         if(dp[index][temp] != -1)
+//             return dp[index][temp];
+        
+//         if(temp > sum)
+//             return 0;
+        
+//         return dp[index][temp] = solve(A , sum , temp , index + 1) || solve(A , sum , temp + A[index] , index + 1);
+//     }
+    
+    
     bool canPartition(vector<int>& nums) {
         int n = nums.size() , sum = 0;
+        
+//         memset(dp , -1 , sizeof(dp));
         
         for(auto x : nums)
             sum += x;
@@ -32,5 +54,7 @@ public:
         }
         
         return dp[n][sum];
+        
+//         return solve(nums , sum , 0 , 0);
     }
 };
