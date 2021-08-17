@@ -4,41 +4,37 @@ public:
         int n = A.size() , res = 0;
         stack<int>s;
         
-        vector<int> leftMin(n , -1);
-        vector<int> rightMin(n , n);
+        int i = 0;
         
-        for(int i = 0 ; i < n ; i++){
+        while(i < n){
             
-            while(!s.empty() && A[s.top()] >= A[i])
-                s.pop();
+            if(s.empty() || A[i] >= A[s.top()]){
+                s.push(i);
+                i++;
+                continue;
+            }
             
-            if(!s.empty())
-                leftMin[i] = s.top();
-            
-            s.push(i);
-        }
-        
-        while(!s.empty())
+            int top = s.top();
             s.pop();
-        
-        for(int i = n - 1 ; i >= 0 ; i--){
-            while(!s.empty() && A[s.top()] >= A[i])
-                s.pop();
             
-            if(!s.empty())
-                rightMin[i] = s.top();
+            int leftBound = (s.empty()) ? -1 : s.top();
             
-            s.push(i);
+            res = max(res , A[top] * (i - leftBound - 1));
+            
         }
         
-        for(int i = 0 ; i < n ; i++){
-            int area = A[i] * (rightMin[i] - leftMin[i] - 1);
+        while(!s.empty()){
             
-            res = max(res , area);
+            int top = s.top();
+            s.pop();
+            
+            int leftBound = (s.empty()) ? -1 : s.top();
+            
+            res = max(res , A[top] * (i - leftBound - 1));
+            
         }
         
         return res;
-        
     }
     
     int maximalRectangle(vector<vector<char>>& matrix) {
