@@ -1,6 +1,13 @@
 class Solution {
 public:
     bool isMatch(string text, string pattern) {
+        
+        if(pattern[0] == '*')
+        pattern = pattern.substr(1);
+    
+        if(pattern.size() == 0)
+        return (text.size() == 0) ? 1 : 0;
+        
         int n = text.size() , m = pattern.size();
 
         vector<vector<bool>>dp(n + 1 , vector<bool>(m + 1 , 0));
