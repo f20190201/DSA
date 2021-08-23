@@ -1,48 +1,38 @@
-struct Node{
-    int data;
-    Node *left , *right;
-    
-    Node(int val){
-        data = val;
-        left = NULL;
-        right = NULL;
-    }
-}
-
 void inorderPrint(Node* root){
     
     if(root == NULL)
         return;
     
     inorderPrint(root->left);
-    cout<<root->data<<" ";
+    cout<<root->val<<" ";
     inorderPrint(root->right);
 }
 
-int search(int inorder[] , int start , int end , int curr){
-    for(int i = start ; i <= end ; i++)
-        if(inorder[i] == curr)
-                return i;
-    return -1;
-}
-
-
-Node* buildTree(int preorder[] , int inorder[] , int start , int end){
-    static int idx = 0;
+int index;
     
-    if(start > end)
-        return NULL;
+    TreeNode* solve(vector<int>& pre , vector<int>& in , int start , int end){
+        
+        if(start > end)
+            return NULL;
     
-    int curr = preorder[idx];
-    idx++;
-    Node* node = new Node(curr);
+        int curr = pre[index];
+        index++;
+        int pos;
+        
+        for(int i = start ; i <= end ; i++){
+            if(in[i] == curr)
+                pos = i;
+        }
+        
+        TreeNode* root = new TreeNode(curr);
+        
+        root->left = solve(pre , in , start , pos - 1);
+        root->right = solve(pre , in , pos + 1 , end);
+        
+        return root;
+    }
     
-    if(start == end)
-        return node;
-    
-    int pos = search(inorder , start , end , curr);
-    node->left = buildTree(preorder , inorder , start ,pos-1);
-    node->right = buildTree(preorder , inorder , pos+1 ,end);
-    
-    return node;
+    TreeNode *buildTree(vector<int> &pre, vector<int> &in) {
+        index = 0;
+        return solve(pre,in,0,in.size() - 1);
 }
