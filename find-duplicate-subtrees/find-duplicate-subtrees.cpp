@@ -18,28 +18,23 @@ public:
             return "@";
         
         string s = "";
+        bool isLeaf = 0;
         
         if(root->left == NULL && root->right == NULL){
             
             s = to_string(root->val);
             
-            if(mp.count(s)){
-            mp[s].second++;
-            }
-            
-            else{
-                mp[s].first = root;
-                mp[s].second = 1;
-            }
-            
-            return s;
+            isLeaf = 1;
         }
         
-        s += to_string(root->val);
-        s += " ";
-        s += solve(root->left);
-        s += " ";
-        s += solve(root->right);
+        if(!isLeaf){
+            
+            s += to_string(root->val);
+            s += " ";
+            s += solve(root->left);
+            s += " ";
+            s += solve(root->right);
+        }
         
         if(mp.count(s)){
             mp[s].second++;
