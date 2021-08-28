@@ -35,8 +35,8 @@ int solve(string a, string b) {
             if(mp1[a[i]] < mp[a[i]])
                 matchCount--;
             
-            if(mp1[a[i]] == 0)
-                mp1.erase(a[i]);
+//             if(mp1[a[i]] == 0)
+//                 mp1.erase(a[i]);
             
         }
 
