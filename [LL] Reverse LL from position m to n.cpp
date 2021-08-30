@@ -57,3 +57,25 @@ ListNode* Solution::reverseBetween(ListNode* A, int m, int n) {
     return A;
 
 }
+
+---------------------------------------------------------------------------
+// https://binarysearch.com/problems/Reverse-an-Inner-Linked-List/solutions/4364362
+    
+LLNode* solve(LLNode* node, int i, int j) {
+    if (i != 0) {
+        node->next = solve(node->next, i - 1, j - 1);
+    } else {
+        LLNode* curr = node;
+        LLNode* prev = NULL;
+        LLNode* next = NULL;
+        for (int k = 0; k <= j; k++) {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        node->next = curr;
+        return prev;
+    }
+    return node;
+}
