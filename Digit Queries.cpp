@@ -1,3 +1,5 @@
+// https://www.youtube.com/watch?v=QAcH8qD9Pe0
+
 #include<bits/stdc++.h>
 #define ll long long
 #define ull unsigned long long
