@@ -13,11 +13,15 @@ class Solution {
 public:
     int globalMax;
     
-    int sumPath(TreeNode* root){
+    int pathSum(TreeNode* root){
+        
         if(root == NULL)
             return 0;
         
-        int l = max(sumPath(root->left) , 0) , r = max(sumPath(root->right) , 0);
+        int l = pathSum(root->left) , r = pathSum(root->right);
+        
+        l = max(l , 0);
+        r = max(r , 0);
         
         globalMax = max(globalMax , root->val + l + r);
         
@@ -28,7 +32,7 @@ public:
         
         globalMax = INT_MIN;
         
-        sumPath(root);
+        pathSum(root);
         
         return globalMax;
     }
