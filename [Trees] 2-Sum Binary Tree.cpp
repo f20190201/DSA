@@ -41,3 +41,46 @@ int Solution::t2Sum(TreeNode* A, int B) {
     return 0;
 
 }
+
+
+------------------------------------------------------------------------
+    
+    
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+unordered_map<int , int> mp;
+
+bool solve(TreeNode* A , int B){
+    
+    if(!A)
+        return 0;
+
+    bool left = solve(A->left , B) , right = solve(A->right , B);
+
+    if(left || right)
+        return 1;
+    
+    if(mp.count(B - A->val) == 1)
+        return 1;
+    
+    else
+        mp[A->val]++;
+    
+    return 0;
+}
+
+int Solution::t2Sum(TreeNode* A, int B) {
+    mp.clear();
+
+    bool ans = solve(A, B);
+
+    return ans;
+}
+
