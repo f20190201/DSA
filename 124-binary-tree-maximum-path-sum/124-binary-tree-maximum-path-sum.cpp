@@ -18,7 +18,8 @@ public:
         if(root == NULL)
             return 0;
         
-        int l = pathSum(root->left) , r = pathSum(root->right);
+        int l = pathSum(root->left);
+        int r = pathSum(root->right);
         
         l = max(l , 0);
         r = max(r , 0);
@@ -26,6 +27,8 @@ public:
         globalMax = max(globalMax , root->val + l + r);
         
         return (root->val + max(l , r));
+        
+        
     }
     
     int maxPathSum(TreeNode* root) {
