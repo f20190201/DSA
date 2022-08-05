@@ -43,9 +43,9 @@ public:
                     break;
             }
             
-            else{
+            else
                 num = generateNextNum(num);
-            }
+            
         }
         
         return result;
